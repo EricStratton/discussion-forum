@@ -65,4 +65,6 @@ class PostControl extends React.Component {
   }
 }
 
+PostControl = connect()(PostControl);
+
 export default PostControl;
