@@ -12,7 +12,11 @@ function Post(props) {
 }
 
 Post.propTypes = {
-  content: PropTypes.string
+  content: PropTypes.string,
+  votes: PropTypes.number,
+  timeStamp: PropTypes.string,
+  id: PropTypes.string,
+  whenPostClicked: PropTypes.func
 }
 
 export default Post;

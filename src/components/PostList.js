@@ -10,8 +10,10 @@ function PostList(props) {
           whenPostClicked={ props.onPostSelection }
           content={ post.content }
           votes={ post.votes }
-          timestamp={ post.timestamp } />
-      )};
+          timestamp={ post.timestamp }
+          key={ post.id }
+          id={ post.id } />
+      )}
     </>
   )
 }

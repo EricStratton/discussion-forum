@@ -2,6 +2,7 @@ import React from 'react';
 import PostList from './PostList';
 import AddPost from './AddPost';
 import EditPost from './EditPost';
+import PostDetail from './PostDetail';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -18,6 +19,7 @@ class PostControl extends React.Component {
 
   handleChangingSelectedPost = (id) => {
     const selectedPost = this.props.masterPostList[id];
+    console.log(this.state.selectedPost);
     this.setState({ selectedPost: selectedPost });
   }
   
@@ -84,7 +86,11 @@ class PostControl extends React.Component {
     let currentlyVisibleState = null;
     let buttonText = null;
     if (this.state.editing) {
-      currentlyVisibleState = <EditPost onEditPost={ this.handleEditPostInList } />
+      currentlyVisibleState = <EditPost post={ this.state.selectedPost } onEditPost={ this.handleEditPostInList } />
+      buttonText = 'Return to Post List';
+    } else if (this.state.selectedPost != null){
+      console.log(this.state.selectedPost);
+      currentlyVisibleState = <PostDetail post={ this.state.selectedPost } />
       buttonText = 'Return to Post List';
     } else if (this.state.formVisibleOnPage) {
       currentlyVisibleState = <AddPost onNewPostCreation={ this.handleAddingNewPostToList } />
