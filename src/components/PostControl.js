@@ -1,6 +1,7 @@
 import React from 'react';
 import PostList from './PostList';
 import AddPost from './AddPost';
+import EditPost from './EditPost';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -30,6 +31,23 @@ class PostControl extends React.Component {
     this.setState({ selectedPost: null });
   }
 
+  handleEditPostInList = (postToEdit) => {
+    const { dispatch } = this.props;
+    const { id, content, votes, timeStamp } = postToEdit;
+    const action = {
+      type: 'ADD_POST',
+      id: id,
+      content: content,
+      votes: votes,
+      timeStamp: timeStamp
+    }
+    dispatch(action);
+    this.setState({
+      editing: false,
+      selectedPost: null
+    });
+  }
+
   handleAddingNewPostToList = (newPost) => {
     const { dispatch } = this.props;
     const { id, content, votes, timeStamp } = newPost;
@@ -44,12 +62,16 @@ class PostControl extends React.Component {
     this.setState({ formVisibleOnPage: false })
   }
 
+  handleEditClick = () => {
+    this.setState({ editing: true });
+  }
+
   handleClick = () => {
     if (this.state.selectedPost != null) {
       this.setState({
         formVisibleOnPage: false,
-        selectedPost: null
-        // Add editing default state later //
+        selectedPost: null,
+        editing: false
       });
     } else {
       this.setState(prevState => ({
@@ -61,7 +83,10 @@ class PostControl extends React.Component {
   render() {
     let currentlyVisibleState = null;
     let buttonText = null;
-    if (this.state.formVisibleOnPage) {
+    if (this.state.editing) {
+      currentlyVisibleState = <EditPost onEditPost={ this.handleEditPostInList } />
+      buttonText = 'Return to Post List';
+    } else if (this.state.formVisibleOnPage) {
       currentlyVisibleState = <AddPost onNewPostCreation={ this.handleAddingNewPostToList } />
       buttonText = "Return to Post List";
     } else {
