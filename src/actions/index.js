@@ -15,3 +15,25 @@ export const addPost = (post) => {
     id
   }
 }
+
+export const upVote = (post) => {
+  const { content, votes, timeStamp, id } = post;
+  return {
+    type: c.ADD_POST,
+    content,
+    votes: votes + 1,
+    timeStamp,
+    id
+  }
+}
+
+export const downVote = (post) => {
+  const { content, votes, timeStamp, id } = post;
+  return {
+    type: c.ADD_POST,
+    content,
+    votes: votes - 1,
+    timeStamp,
+    id
+  }
+}
