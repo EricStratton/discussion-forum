@@ -20,7 +20,6 @@ class PostControl extends React.Component {
 
   handleChangingSelectedPost = (id) => {
     const selectedPost = this.props.masterPostList[id];
-    console.log(this.state.selectedPost);
     this.setState({ selectedPost: selectedPost });
   }
   
@@ -35,6 +34,22 @@ class PostControl extends React.Component {
     const { dispatch } = this.props;
     const { id, content, votes, timeStamp } = postToEdit;
     const action = a.addPost(postToEdit);
+    dispatch(action);
+    this.setState({
+      editing: false,
+      selectedPost: null
+    });
+  }
+
+  handleVoteInList = (postToVote, upVote) => {
+    const { dispatch } = this.props;
+    const { id, content, votes, timeStamp } = postToVote;
+    let action;
+    if(upVote) {
+      action = a.upVote(postToVote);
+    } else {
+      action = a.downVote(postToVote);
+    }
     dispatch(action);
     this.setState({
       editing: false,
@@ -75,7 +90,7 @@ class PostControl extends React.Component {
       currentlyVisibleState = <EditPost post={ this.state.selectedPost } onEditPost={ this.handleEditPostInList } />
       buttonText = 'Return to Post List';
     } else if (this.state.selectedPost != null){
-      currentlyVisibleState = <PostDetail post={ this.state.selectedPost } onClickingDelete={ this.handleDeletingPostFromList } />
+      currentlyVisibleState = <PostDetail post={ this.state.selectedPost } onClickingDelete={ this.handleDeletingPostFromList } onClickingVote={ this.handleVoteInList } />
       buttonText = 'Return to Post List';
     } else if (this.state.formVisibleOnPage) {
       currentlyVisibleState = <AddPost onNewPostCreation={ this.handleAddingNewPostToList } />
