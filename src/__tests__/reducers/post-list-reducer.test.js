@@ -1,4 +1,5 @@
 import postListReducer from '../../reducers/post-list-reducer';
+import * as c from '../../actions/ActionTypes'
 
 describe ('postListReducer', () => {
 
@@ -47,7 +48,7 @@ describe ('postListReducer', () => {
 
   test('Should successfully delete a post', () => {
     action = {
-      type: 'DELETE_POST',
+      type: c.DELETE_POST,
       id: 1
     };
     expect(postListReducer(currentState, action)).toEqual({
@@ -57,5 +58,4 @@ describe ('postListReducer', () => {
       id: 2 }
     });
   });
-
 });
