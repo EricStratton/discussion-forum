@@ -11,7 +11,7 @@ function ReusableForm(props) {
         <label for='content'>Post content:</label>
         <textarea name='content' placeholder='Write your post here!'/>
         <input type='hidden' name='votes' value='0'/>
-        <input type='hidden' name='timeStamp' value= { hours + ":" + minutes }></input>
+        <input type='hidden' name='timeStamp' value= { hours + ":" + minutes } />
         <button type='submit'>{ props.buttonText }</button>
       </form>
     </>
