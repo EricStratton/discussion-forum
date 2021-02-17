@@ -5,6 +5,7 @@ import EditPost from './EditPost';
 import PostDetail from './PostDetail';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import * as a from '../actions/index';
 
 class PostControl extends React.Component {
 
@@ -25,10 +26,7 @@ class PostControl extends React.Component {
   
   handleDeletingPostFromList = (id) => {
     const { dispatch } = this.props;
-    const action = {
-      type: 'DELETE_POST',
-      id: id
-    }
+    const action = a.deletePost(id);
     dispatch(action);
     this.setState({ selectedPost: null });
   }
@@ -36,13 +34,7 @@ class PostControl extends React.Component {
   handleEditPostInList = (postToEdit) => {
     const { dispatch } = this.props;
     const { id, content, votes, timeStamp } = postToEdit;
-    const action = {
-      type: 'ADD_POST',
-      id: id,
-      content: content,
-      votes: votes,
-      timeStamp: timeStamp
-    }
+    const action = a.addPost(postToEdit);
     dispatch(action);
     this.setState({
       editing: false,
@@ -53,13 +45,7 @@ class PostControl extends React.Component {
   handleAddingNewPostToList = (newPost) => {
     const { dispatch } = this.props;
     const { id, content, votes, timeStamp } = newPost;
-    const action = {
-      type: 'ADD_POST',
-      id: id,
-      content: content,
-      votes: votes,
-      timeStamp: timeStamp
-    }
+    const action = a.addPost(newPost);
     dispatch(action);
     this.setState({ formVisibleOnPage: false })
   }
@@ -89,7 +75,6 @@ class PostControl extends React.Component {
       currentlyVisibleState = <EditPost post={ this.state.selectedPost } onEditPost={ this.handleEditPostInList } />
       buttonText = 'Return to Post List';
     } else if (this.state.selectedPost != null){
-      console.log(this.state.selectedPost);
       currentlyVisibleState = <PostDetail post={ this.state.selectedPost } />
       buttonText = 'Return to Post List';
     } else if (this.state.formVisibleOnPage) {
