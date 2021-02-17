@@ -75,7 +75,7 @@ class PostControl extends React.Component {
       currentlyVisibleState = <EditPost post={ this.state.selectedPost } onEditPost={ this.handleEditPostInList } />
       buttonText = 'Return to Post List';
     } else if (this.state.selectedPost != null){
-      currentlyVisibleState = <PostDetail post={ this.state.selectedPost } />
+      currentlyVisibleState = <PostDetail post={ this.state.selectedPost } onClickingDelete={ this.handleDeletingPostFromList } />
       buttonText = 'Return to Post List';
     } else if (this.state.formVisibleOnPage) {
       currentlyVisibleState = <AddPost onNewPostCreation={ this.handleAddingNewPostToList } />
