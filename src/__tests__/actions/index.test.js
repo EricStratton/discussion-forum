@@ -9,4 +9,15 @@ describe('discussion forum actions', () => {
         id: 1
     });
   });
+
+  it('addPost should create ADD_POST action', () => {
+    expect(actions.addPost({ content: 'Socks are cool.', votes: '0', timeStamp: '13:33', id: 1 })).toEqual({
+      type: constants.ADD_POST,
+      content: 'Socks are cool.',
+      votes: '0',
+      timeStamp: '13:33',
+      id: 1
+    });
+  });
+
 });
