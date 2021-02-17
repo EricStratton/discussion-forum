@@ -8,7 +8,7 @@ function AddPost(props) {
     e.preventDefault();
     props.onNewPostCreation({
       content: e.target.content.value,
-      votes: e.target.votes.value,
+      votes: parseInt(e.target.votes.value),
       timeStamp: e.target.timeStamp.value,
       id: v4()
     })
